@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aasu Studio Gallery</title>
+  <style>
+    body { font-family: Arial; background: #f7f7f7; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; }
+    form { margin-bottom: 2rem; text-align: center; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    img { width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .logout { text-align: center; margin-top: 2rem; }
+    input[type="file"] { padding: 1rem; }
+    button { padding: 0.5rem 1rem; background: #43a047; color: white; border: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aasu Studio - Admin Panel</h1>
+    <p>Upload and View Photos</p>
+  </header>
+  <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <input type="file" name="files" multiple>
+    <button type="submit">Upload</button>
+</form>
+
+  <div class="gallery">
+    {% for image in images %}
+      <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded Image" />
+    {% endfor %}
+  </div>
+  <div class="logout">
+    <a href="/logout">Logout</a>
+  </div>
+</body>
+</html>
